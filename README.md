@@ -2,6 +2,10 @@
 
 A simple visual editor for creating commutative diagrams in xypic. You can [try it out here](https://darknmt.github.io/res/xypic-editor/).
 
+## Changelog:
+- [xypic](https://www.tug.org/applications/Xy-pic/) output
+- double arrow (for equality)
+
 # tikzcd-editor
 
 A simple visual editor for creating commutative diagrams.
