@@ -166,7 +166,7 @@ export default class App extends Component {
 
     handleAboutClick = () => {
         let a = render((
-            <a href="https://github.com/yishn/tikzcd-editor" target="_blank" />
+            <a href="https://github.com/darknmt/xypic-editor" target="_blank" />
         ), document.body)
 
         a.click()

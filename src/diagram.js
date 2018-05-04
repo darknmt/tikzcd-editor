@@ -65,25 +65,30 @@ export function toTeX(diagram) {
                     value={edge.value}
                     labelPosition={edge.labelPosition}
                     args={[
-                        ...[edge.head, edge.line, edge.tail].map((id, i) => ({
-                            none: ['no head', null, null][i],
-                            default: null,
-                            harpoon: 'harpoon',
-                            harpoonalt: "harpoon'",
-                            hook: 'hook',
-                            hookalt: "hook'",
-                            mapsto: 'maps to',
-                            tail: 'tail',
-                            twoheads: 'two heads',
-                            dashed: 'dashed',
-                            dotted: 'dotted',
-                            solid: null
+                        ...[edge.tail, edge.line, edge.head].map((id, i) => ({
+                            none: ['', '-', ''][i],
+                            default: ['', '-', '>'][i],
+                            null: ['', '-', '>'][i],                            
+                            undefined: ['', '-', '>'][i],
+                            harpoon: '^>',
+                            harpoonalt: "_>'",
+                            hook: '^{(}',
+                            hookalt: "_{(}",
+                            mapsto: '|',
+                            tail: ')',
+                            twoheads: '>>',
+                            dashed: '--',
+                            dotted: '.',
+                            solid: '-',
+                            double: '='
                         })[id]),
-
-                        edge.bend > 0 ? `bend left=${edge.bend}`.replace('=30', '')
-                        : edge.bend < 0 ? `bend right=${-edge.bend}`.replace('=30', '')
-                        : null
                     ].filter(x => x != null)}
+                    xybend={
+                        edge.bend > 0 ? `@/^${ {30: '', 49: '1pc', 60: '1.5pc', 67: '2pc', 71: '2.5pc', 74: '3pc', 76: '3.5pc' , 78: '4pc', 79: '4.5pc', 80: '5pc'}[edge.bend]}/`
+                        : edge.bend < 0 ? `@/_${ {30: '', 49: '1pc', 60: '1.5pc', 67: '2pc', 71: '2.5pc', 74: '3pc', 76: '3.5pc' , 78: '4pc', 79: '4.5pc', 80: '5pc'}[-edge.bend]}/`
+                        : ''
+                    }
+
                 />
             ])}
         </Diagram>

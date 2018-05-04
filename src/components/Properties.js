@@ -89,7 +89,7 @@ export default class Properties extends Component {
                     change = {[prop]: data[prop] === id ? 'none' : id}
                 } else if (id === 'head') {
                     change = {head: data.head == null ? 'none' : null}
-                } else if (['solid', 'dashed', 'dotted'].includes(id)) {
+                } else if (['solid', 'dashed', 'dotted', 'double'].includes(id)) {
                     change = {line: id}
                 } else if (['labelleft', 'labelright', 'labelinside'].includes(id)) {
                     change = {labelPosition: id.slice(5)}
@@ -104,7 +104,6 @@ export default class Properties extends Component {
                     let increase = bend === 0 || (id === 'bendleft' ? bend > 0 : bend < 0)
                     let sign = bend !== 0 ? Math.sign(bend) : id === 'bendleft' ? 1 : -1
                     let steps = [0, 30, 49, 60, 67, 71, 74, 76, 78, 79, 80]
-
                     let index = steps.reduce((acc, x, i) => x <= Math.abs(bend) ? i : acc, -1)
                     if (index < steps.length - 1 && bend >= (steps[index + 1] + steps[index]) / 2) index++
 
@@ -225,7 +224,18 @@ export default class Properties extends Component {
                     name="Bend Right (Arrow Key Down)"
                     onClick={this.handleButtonClick('bendright')}
                 />
+                
 
+                <Button
+                    icon="./img/properties/bendleft.svg"
+                    name="Bend Left (Arrow Key Up)"
+                    onClick={this.handleButtonClick('bendleft')}
+                />                
+                
+                
+                
+                <Separator/>
+                
                 <Button
                     checked={data.line === 'dotted'}
                     icon="./img/properties/dotted.svg"
@@ -239,6 +249,14 @@ export default class Properties extends Component {
                     name="Dashed"
                     onClick={this.handleButtonClick('dashed')}
                 />
+                
+                <Button
+                    checked={!data.line  === 'double'}
+                    icon="./img/properties/double.svg"
+                    name="Double"
+                    onClick={this.handleButtonClick('double')}
+                />
+                             
 
                 <Button
                     checked={!data.line || data.line === 'solid'}
@@ -247,11 +265,6 @@ export default class Properties extends Component {
                     onClick={this.handleButtonClick('solid')}
                 />
 
-                <Button
-                    icon="./img/properties/bendleft.svg"
-                    name="Bend Left (Arrow Key Up)"
-                    onClick={this.handleButtonClick('bendleft')}
-                />
 
                 <Separator/>
 
